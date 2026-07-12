@@ -364,14 +364,20 @@
 
             <!-- Hasil Kalkulasi Card -->
             <div class="p-5 rounded-2xl border border-solid border-indigo-100 dark:border-indigo-900/50 bg-gradient-to-br from-indigo-50/80 to-blue-50/80 dark:from-indigo-950/30 dark:to-indigo-900/20 text-center space-y-2 mt-6 shadow-sm">
-                <label for="hasilKalkulasi" class="label-premium text-indigo-600 dark:text-indigo-400 font-bold tracking-wide">HASIL KALKULASI</label>
-                <div class="flex items-baseline justify-center gap-1.5">
-                    <input type="text" name="hasilKalkulasi" id="hasilKalkulasi" readonly 
-                        class="bg-transparent border-none text-3xl font-extrabold text-center text-indigo-700 dark:text-indigo-400 outline-none w-full max-w-xs focus:ring-0" 
-                        style="font-family: var(--font-title); font-size: 2.25rem;" placeholder="-">
-                    <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Ω/km</span>
+                <label class="label-premium text-indigo-600 dark:text-indigo-400 font-bold tracking-wide">HASIL KALKULASI</label>
+                <input type="hidden" name="hasilKalkulasi" id="hasilKalkulasi" value="">
+                <div class="flex items-baseline justify-center gap-1.5 h-10">
+                    <span id="hasilDisplay" class="text-sm font-normal text-gray-400 dark:text-gray-500">mohon lengkapi data input</span>
+                    <span id="unitSatuan" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hidden">Ω/km</span>
                 </div>
                 <p id="pesanHasil" class="text-xs font-medium text-center h-5 transition-all duration-300"></p>
+                
+                <!-- Action Buttons inside Card -->
+                <div class="pt-2 flex justify-center">
+                    <button type="button" id="salinLaporanBtn" class="flex items-center gap-2 px-4 py-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 rounded-lg hover:bg-indigo-100/50 dark:hover:bg-indigo-950/50 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-sm" disabled>
+                        <i class="bi bi-clipboard"></i> <span id="salinBtnText">Salin Laporan</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Standard Selector Tabs -->
@@ -949,43 +955,100 @@
         const penampangSelect = document.getElementById('penampang');
         const spekMaxInput = document.getElementById('spekMax');
         const hasilKalkulasiInput = document.getElementById('hasilKalkulasi');
+        const hasilDisplay = document.getElementById('hasilDisplay');
+        const unitSatuan = document.getElementById('unitSatuan');
         const pesanHasil = document.getElementById('pesanHasil');
         const hapusBtn = document.getElementById('hapusBtn');
 
         function validateNumericInput(event) {
-            event.target.value = event.target.value.replace(/[^0-9.]/g, '');
+            // Ganti karakter selain angka, titik, dan koma
+            let val = event.target.value.replace(/[^0-9.,]/g, '');
+            
+            // Batasi hanya satu tanda pemisah desimal (titik atau koma)
+            const parts = val.split(/[.,]/);
+            if (parts.length > 2) {
+                const match = val.match(/[.,]/);
+                const separator = match ? match[0] : '.';
+                val = parts[0] + separator + parts.slice(1).join('');
+            }
+            event.target.value = val;
         }
 
         function hitungHasil() {
-            hasilKalkulasiInput.classList.remove('text-green-500', 'text-red-500');
             pesanHasil.className = 'text-center text-sm h-5';
             pesanHasil.innerText = '';
-            const pembacaan = parseFloat(pembacaanAlatInput.value);
-            const panjang = parseFloat(panjangInput.value);
-            const koreksi = parseFloat(faktorKoreksiInput.value);
-            if (!isNaN(pembacaan) && !isNaN(panjang) && !isNaN(koreksi) && panjang !== 0) {
+            
+            const rawPembacaan = pembacaanAlatInput.value.replace(',', '.');
+            const rawPanjang = panjangInput.value.replace(',', '.');
+            const rawKoreksi = faktorKoreksiInput.value.replace(',', '.');
+            
+            const pembacaan = parseFloat(rawPembacaan);
+            const panjang = parseFloat(rawPanjang);
+            const koreksi = parseFloat(rawKoreksi);
+            
+            const salinBtn = document.getElementById('salinLaporanBtn');
+            if (salinBtn) salinBtn.disabled = true;
+
+            // Reset visual display ke kondisi awal kosong
+            hasilKalkulasiInput.value = '';
+            if (hasilDisplay) {
+                hasilDisplay.innerText = 'mohon lengkapi data input';
+                hasilDisplay.className = 'text-sm font-normal text-gray-400 dark:text-gray-500';
+                hasilDisplay.style.fontSize = '';
+            }
+            if (unitSatuan) unitSatuan.classList.add('hidden');
+
+            // Validasi masukan nol pada panjang
+            if (rawPanjang !== '' && panjang === 0) {
+                pesanHasil.innerText = 'Panjang sampel kabel tidak boleh 0 meter!';
+                pesanHasil.className = 'text-center text-xs font-semibold text-red-500 h-5 italic';
+                return;
+            }
+            
+            // Validasi suhu di luar tabel jika diinput tetapi tidak ada faktor koreksi
+            const rawSuhu = suhuInput.value.replace(',', '.');
+            const suhuNumber = parseFloat(rawSuhu);
+            if (suhuInput.value !== '' && isNaN(koreksi)) {
+                pesanHasil.innerText = 'Suhu di luar batas standar faktor koreksi (21°C - 34.9°C)!';
+                pesanHasil.className = 'text-center text-xs font-semibold text-red-500 h-5 italic';
+                return;
+            }
+
+            if (!isNaN(pembacaan) && !isNaN(panjang) && !isNaN(koreksi)) {
                 const hasil = (pembacaan / panjang) * koreksi;
                 hasilKalkulasiInput.value = hasil.toFixed(4);
+                
+                // Tampilkan hasil secara visual
+                if (hasilDisplay) {
+                    hasilDisplay.innerText = hasil.toFixed(4);
+                    hasilDisplay.className = 'text-3xl font-extrabold text-indigo-700 dark:text-indigo-400';
+                    hasilDisplay.style.fontSize = '2.25rem';
+                }
+                if (unitSatuan) unitSatuan.classList.remove('hidden');
+                
                 const spekMaxString = spekMaxInput.value.replace(',', '.');
                 const spekMax = parseFloat(spekMaxString);
+                if (salinBtn) salinBtn.disabled = false;
+                
                 if (!isNaN(spekMax)) {
+                    if (hasilDisplay) {
+                        hasilDisplay.classList.remove('text-indigo-700', 'dark:text-indigo-400');
+                    }
                     if (hasil < spekMax) {
-                        hasilKalkulasiInput.classList.add('text-green-500');
+                        if (hasilDisplay) hasilDisplay.classList.add('text-green-500');
                         pesanHasil.innerText = 'Hasil pengujian memenuhi spesifikasi standar.';
-                        pesanHasil.classList.add('italic', 'text-green-500');
+                        pesanHasil.classList.add('italic', 'text-green-500', 'text-xs');
                     } else {
-                        hasilKalkulasiInput.classList.add('text-red-500');
+                        if (hasilDisplay) hasilDisplay.classList.add('text-red-500');
                         pesanHasil.innerText = 'Hasil pengujian tidak memenuhi spesifikasi standar.';
-                        pesanHasil.classList.add('italic', 'text-red-500');
+                        pesanHasil.classList.add('italic', 'text-red-500', 'text-xs');
                     }
                 }
-            } else {
-                hasilKalkulasiInput.value = '';
             }
         }
         
         function updateFaktorKoreksi() {
-            const suhuValueRaw = suhuInput.value;
+            const suhuValueRaw = suhuInput.value.replace(',', '.');
             const suhuNumber = parseFloat(suhuValueRaw);
             faktorKoreksiInput.value = '';
             if (!isNaN(suhuNumber)) {
@@ -998,6 +1061,7 @@
             }
             hitungHasil();
         }
+
 
         function updateSpekMax() {
             const konduktorValue = konduktorSelect.value;
@@ -1016,6 +1080,8 @@
             panjangInput.value = '';
             suhuInput.value = '';
             updateFaktorKoreksi();
+            const salinBtn = document.getElementById('salinLaporanBtn');
+            if (salinBtn) salinBtn.disabled = true;
         }
 
         // Tambahkan semua event listener
@@ -1059,6 +1125,54 @@
                 if (icon) icon.className = isDark ? 'bi bi-sun-fill' : 'bi-moon-stars-fill';
             });
             initTheme();
+        }
+
+        // Logika Tombol Salin Laporan
+        const salinLaporanBtn = document.getElementById('salinLaporanBtn');
+        const salinBtnText = document.getElementById('salinBtnText');
+        if (salinLaporanBtn) {
+            salinLaporanBtn.addEventListener('click', () => {
+                const pembacaan = pembacaanAlatInput.value;
+                const panjang = panjangInput.value;
+                const suhu = suhuInput.value;
+                const koreksi = faktorKoreksiInput.value;
+                const hasil = hasilKalkulasiInput.value;
+                const spek = spekMaxInput.value;
+                const konduktor = konduktorSelect.value;
+                const penampang = penampangSelect.value;
+                
+                const isPass = parseFloat(hasil) < parseFloat(spek.replace(',', '.'));
+                const statusUji = isPass ? 'MEMENUHI SPESIFIKASI (PASS)' : 'TIDAK MEMENUHI SPESIFIKASI (FAIL)';
+                
+                const tgl = new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
+                
+                const reportText = `=== LAPORAN PENGUJIAN HAMBATAN KONDUKTOR (IEC 60228) ===
+Waktu Pengujian  : ${tgl}
+Konduktor        : ${konduktor} - ${penampang} mm²
+Pembacaan Alat   : ${pembacaan} mΩ
+Panjang Sampel   : ${panjang} m
+Suhu Pengukuran  : ${suhu} °C (Faktor Koreksi: ${koreksi})
+------------------------------------------------------
+Hasil Hambatan   : ${hasil} Ω/km (pada 20°C)
+Hambatan Maks    : ${spek} Ω/km
+Status Pengujian : ${statusUji}
+======================================================`;
+
+                navigator.clipboard.writeText(reportText).then(() => {
+                    const icon = salinLaporanBtn.querySelector('i');
+                    icon.className = 'bi bi-check-lg text-green-500';
+                    salinBtnText.innerText = 'Tersalin!';
+                    salinLaporanBtn.classList.add('border-green-300', 'bg-green-50/20');
+                    
+                    setTimeout(() => {
+                        icon.className = 'bi bi-clipboard';
+                        salinBtnText.innerText = 'Salin Laporan';
+                        salinLaporanBtn.classList.remove('border-green-300', 'bg-green-50/20');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Gagal menyalin: ', err);
+                });
+            });
         }
 
         // Panggil fungsi inisialisasi
