@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Proyek | Mengkoding</title>
+  <meta name="description" content="Halaman detail proyek Mengkoding.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="scroll-progress"></div>
+
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo" id="header-logo-project">
+        Mengkoding<span class="logo-dot"></span>
+      </a>
+      <div class="nav-clock" id="nav-clock">
+        <span id="clock-time"></span>
+        <span class="clock-sep">·</span>
+        <span id="clock-date"></span>
+      </div>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="index.html#projects">Proyek</a></li>
+          <li><a href="about.html">Tentang</a></li>
+        </ul>
+        <button id="theme-toggle" title="Ganti tema" aria-label="Toggle tema">☀</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-project">
+    <a href="index.html" class="back-link" id="back-to-list">← Kembali ke Daftar Proyek</a>
+    <h1 id="project-title">Memuat...</h1>
+    <p class="project-meta-info" id="project-cat"></p>
+    <div class="project-placeholder">
+      <h3>Proyek ini belum tersedia</h3>
+      <p>Halaman ini sedang dalam tahap pengembangan. Silakan cek kembali nanti.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-text">&copy; 2026 Mengkoding</div>
+      <div class="social-links">
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Fill project title from URL param ?id=
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      const project = PROJECTS.find(p => p.id === id);
+      const titleEl = document.getElementById('project-title');
+      const catEl   = document.getElementById('project-cat');
+      if (project) {
+        titleEl.textContent = project.name;
+        catEl.textContent   = CAT_LABELS[project.cat] || project.cat;
+        document.title      = project.name + ' | Mengkoding';
+      } else {
+        titleEl.textContent = 'Proyek Tidak Ditemukan';
+      }
+    });
+  </script>
+</body>
+</html>

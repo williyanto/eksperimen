@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Proyek Coding | Mengkoding</title>
+    <meta name="description" content="Daftar 20 proyek coding yang sedang dikembangkan.">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Sticky Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo" id="header-logo">
+                Mengkoding<span class="logo-dot"></span>
+            </a>
+
+            <div class="nav-clock" id="nav-clock">
+                <span id="clock-time"></span>
+                <span class="clock-sep">·</span>
+                <span id="clock-date"></span>
+            </div>
+
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="#projects">Proyek</a></li>
+                    <li><a href="about.html">Tentang</a></li>
+                </ul>
+                <button id="theme-toggle" title="Ganti tema" aria-label="Toggle tema gelap/terang">☀</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Daftar Proyek <span>Coding</span></h1>
+        <p>20 proyek coding yang sedang dikembangkan. Klik nama proyek untuk membuka halamannya.</p>
+    </section>
+
+    <!-- Filter & Search Controls -->
+    <div class="controls" id="projects">
+        <div class="filter-tabs">
+            <button class="filter-btn active" data-filter="all" id="filter-all">Semua</button>
+            <button class="filter-btn" data-filter="web" id="filter-web">Web</button>
+            <button class="filter-btn" data-filter="game" id="filter-game">Game</button>
+            <button class="filter-btn" data-filter="mobile" id="filter-mobile">Mobile</button>
+            <button class="filter-btn" data-filter="tool" id="filter-tool">Tools</button>
+        </div>
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" placeholder="Cari proyek..." autocomplete="off">
+        </div>
+    </div>
+
+    <!-- Project List (rendered by JS) -->
+    <main class="project-section">
+        <div class="project-list" id="project-list"></div>
+        <div class="no-results" id="no-results">Tidak ada proyek yang cocok.</div>
+        <div class="show-more-wrap">
+            <span class="show-more-info" id="show-more-info"></span>
+            <button class="show-more-btn" id="show-more-btn" style="display:none;"></button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-text">&copy; 2026 Mengkoding</div>
+            <div class="social-links">
+                <a href="https://github.com/williyanto" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.facebook.com/williyanto.adiii" target="_blank"
+                    rel="noopener noreferrer">Facebook</a>
+                <a href="https://www.instagram.com/williyanto.adi/" target="_blank"
+                    rel="noopener noreferrer">Instagram</a>
+            </div>
+        </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
