@@ -6,81 +6,276 @@ const PROJECTS = [
   // Cara isi: ganti url: '' dengan url: 'https://link-proyek-anda.com'
   // Jika url dikosongkan, akan diarahkan ke halaman placeholder project.html
   {
-    id: "kalkulator-iece",
-    name: "Kalkulator IEC Trial",
+    id: "kalkulator_hamtan_konduktor ",
+    name: "Kalkulator Hambatan Konduktor",
     cat: "web",
-    url: "https://williyanto-eksperimen.netlify.app/",
+    url: "kalkulator_hambatan_konduktor/index_kalkulator_hambatan.html",
   },
   {
-    id: "retro-synth-runner",
-    name: "Retro Synth Runner",
+    id: "Daily Testing Performance",
+    name: "Daily Testing Performance",
     cat: "game",
-    url: "https://www.instagram.com/williyanto.adi/",
+    url: "daily_testing_performance/index_daily.html",
   },
   {
     id: "devmetrics-dashboard",
-    name: "DevMetrics Dashboard",
+    name: "Project Sedang dikembangkan",
     cat: "web",
     url: "",
   },
-  { id: "nova-weather", name: "Nova Weather", cat: "mobile", url: "" },
-  { id: "quicksql-sandbox", name: "QuickSQL Sandbox", cat: "tool", url: "" },
-  { id: "aura-soundscape", name: "Aura Soundscape", cat: "web", url: "" },
-  { id: "byteblog-engine", name: "ByteBlog Engine", cat: "tool", url: "" },
-  { id: "taskify-planner", name: "Taskify Planner", cat: "web", url: "" },
-  { id: "css-generator-pro", name: "CSS Generator Pro", cat: "tool", url: "" },
-  { id: "gitstats-tracker", name: "GitStats Tracker", cat: "tool", url: "" },
-  { id: "chatnet-terminal", name: "ChatNet Terminal", cat: "tool", url: "" },
+  {
+    id: "nova-weather",
+    name: "Project Sedang dikembangkan",
+    cat: "mobile",
+    url: "",
+  },
+  {
+    id: "quicksql-sandbox",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
+  {
+    id: "aura-soundscape",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  {
+    id: "byteblog-engine",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
+  {
+    id: "taskify-planner",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  {
+    id: "css-generator-pro",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
+  {
+    id: "gitstats-tracker",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
+  {
+    id: "chatnet-terminal",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
   {
     id: "markdown-live-editor",
-    name: "Markdown Live Editor",
+    name: "Project Sedang dikembangkan",
     cat: "web",
     url: "",
   },
-  { id: "cryptotracker-web", name: "CryptoTracker Web", cat: "web", url: "" },
-  { id: "pixl-paint", name: "Pixl Paint", cat: "web", url: "" },
-  { id: "docugate-reader", name: "Docugate Reader", cat: "tool", url: "" },
+  {
+    id: "cryptotracker-web",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  {
+    id: "pixl-paint",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  {
+    id: "docugate-reader",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
   {
     id: "soundwaves-visualizer",
-    name: "SoundWaves Visualizer",
+    name: "Project Sedang dikembangkan",
     cat: "web",
     url: "",
   },
-  { id: "tinyurl-minifier", name: "TinyURL Minifier", cat: "tool", url: "" },
-  { id: "focus-pomodoro", name: "Focus Pomodoro", cat: "web", url: "" },
-  { id: "flexbox-playground", name: "Flexbox Playground", cat: "web", url: "" },
-  { id: "webinspector-cli", name: "WebInspector CLI", cat: "tool", url: "" },
+  {
+    id: "tinyurl-minifier",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
+  {
+    id: "focus-pomodoro",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  {
+    id: "flexbox-playground",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  {
+    id: "webinspector-cli",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
   // ── 30 Proyek Tambahan ──
-  { id: "codesnip-vault", name: "CodeSnip Vault", cat: "tool", url: "" },
-  { id: "portfoify", name: "Portfoify", cat: "web", url: "" },
-  { id: "snaptype", name: "SnapType", cat: "mobile", url: "" },
-  { id: "regexcraft", name: "RegexCraft", cat: "tool", url: "" },
-  { id: "daily-kanji", name: "Daily Kanji", cat: "mobile", url: "" },
-  { id: "browserdb", name: "BrowserDB", cat: "tool", url: "" },
-  { id: "devtimer", name: "DevTimer", cat: "tool", url: "" },
-  { id: "palettix", name: "Palettix", cat: "web", url: "" },
-  { id: "gridmaster", name: "GridMaster", cat: "web", url: "" },
-  { id: "logpilot", name: "LogPilot", cat: "tool", url: "" },
-  { id: "hexcolor-picker", name: "HexColor Picker", cat: "web", url: "" },
-  { id: "typeracer-clone", name: "TypeRacer Clone", cat: "game", url: "" },
-  { id: "morse-decoder", name: "Morse Decoder", cat: "tool", url: "" },
-  { id: "ascii-art-gen", name: "ASCII Art Generator", cat: "tool", url: "" },
-  { id: "invoice-maker", name: "Invoice Maker", cat: "web", url: "" },
-  { id: "budgetly", name: "Budgetly", cat: "mobile", url: "" },
-  { id: "rps-arena", name: "RPS Arena", cat: "game", url: "" },
-  { id: "fontpreview", name: "FontPreview", cat: "web", url: "" },
-  { id: "notionclone-lite", name: "NotionClone Lite", cat: "web", url: "" },
-  { id: "qr-studio", name: "QR Studio", cat: "tool", url: "" },
-  { id: "habitpulse", name: "HabitPulse", cat: "mobile", url: "" },
-  { id: "cssanimator", name: "CSS Animator", cat: "web", url: "" },
-  { id: "linktree-clone", name: "Linktree Clone", cat: "web", url: "" },
-  { id: "snake-reborn", name: "Snake Reborn", cat: "game", url: "" },
-  { id: "chartbuilder", name: "ChartBuilder", cat: "web", url: "" },
-  { id: "envault", name: "EnVault", cat: "tool", url: "" },
-  { id: "pingmon", name: "PingMon", cat: "tool", url: "" },
-  { id: "shadergallery", name: "Shader Gallery", cat: "web", url: "" },
-  { id: "minesweeper-pro", name: "Minesweeper Pro", cat: "game", url: "" },
-  { id: "devfolio-builder", name: "Devfolio Builder", cat: "web", url: "" },
+  {
+    id: "codesnip-vault",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
+  { id: "portfoify", name: "Project Sedang dikembangkan", cat: "web", url: "" },
+  {
+    id: "snaptype",
+    name: "Project Sedang dikembangkan",
+    cat: "mobile",
+    url: "",
+  },
+  {
+    id: "regexcraft",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
+  {
+    id: "daily-kanji",
+    name: "Project Sedang dikembangkan",
+    cat: "mobile",
+    url: "",
+  },
+  {
+    id: "browserdb",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
+  { id: "devtimer", name: "Project Sedang dikembangkan", cat: "tool", url: "" },
+  { id: "palettix", name: "Project Sedang dikembangkan", cat: "web", url: "" },
+  {
+    id: "gridmaster",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  { id: "logpilot", name: "Project Sedang dikembangkan", cat: "tool", url: "" },
+  {
+    id: "hexcolor-picker",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  {
+    id: "typeracer-clone",
+    name: "Project Sedang dikembangkan",
+    cat: "game",
+    url: "",
+  },
+  {
+    id: "morse-decoder",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
+  {
+    id: "ascii-art-gen",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
+  {
+    id: "invoice-maker",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  {
+    id: "budgetly",
+    name: "Project Sedang dikembangkan",
+    cat: "mobile",
+    url: "",
+  },
+  {
+    id: "rps-arena",
+    name: "Project Sedang dikembangkan",
+    cat: "game",
+    url: "",
+  },
+  {
+    id: "fontpreview",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  {
+    id: "notionclone-lite",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  {
+    id: "qr-studio",
+    name: "Project Sedang dikembangkan",
+    cat: "tool",
+    url: "",
+  },
+  {
+    id: "habitpulse",
+    name: "Project Sedang dikembangkan",
+    cat: "mobile",
+    url: "",
+  },
+  {
+    id: "cssanimator",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  {
+    id: "linktree-clone",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  {
+    id: "snake-reborn",
+    name: "Project Sedang dikembangkan",
+    cat: "game",
+    url: "",
+  },
+  {
+    id: "chartbuilder",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  { id: "envault", name: "Project Sedang dikembangkan", cat: "tool", url: "" },
+  { id: "pingmon", name: "Project Sedang dikembangkan", cat: "tool", url: "" },
+  {
+    id: "shadergallery",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
+  {
+    id: "minesweeper-pro",
+    name: "Project Sedang dikembangkan",
+    cat: "game",
+    url: "",
+  },
+  {
+    id: "devfolio-builder",
+    name: "Project Sedang dikembangkan",
+    cat: "web",
+    url: "",
+  },
 ];
 
 const CAT_LABELS = {
@@ -154,18 +349,32 @@ function initClock() {
 
   function tick() {
     const now = new Date();
-    timeEl.textContent = now.toLocaleTimeString("id-ID", {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-    });
-    dateEl.textContent = now.toLocaleDateString("id-ID", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
+    const isDesktop = window.innerWidth >= 768;
+
+    if (isDesktop) {
+      // Full format for desktop
+      timeEl.textContent = now.toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      });
+      dateEl.textContent = now.toLocaleDateString("id-ID", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+    } else {
+      // Short format for mobile
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const year = now.getFullYear();
+      timeEl.textContent = `${hours}.${minutes}`;
+      dateEl.textContent = `${day}/${month}/${year}`;
+    }
   }
   tick();
   setInterval(tick, 1000);
