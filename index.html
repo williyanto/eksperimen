@@ -101,6 +101,9 @@
                 <a class="nav-link active" data-tab="dashboard" onclick="switchTab('dashboard')">
                     <i class="fas fa-chart-line"></i> Dashboard Analytics
                 </a>
+                <a class="nav-link" data-tab="recent-tests" onclick="switchTab('recent-tests')">
+                    <i class="fas fa-history"></i> Pengujian Terakhir
+                </a>
                 <a class="nav-link" data-tab="monthly" onclick="switchTab('monthly')">
                     <i class="fas fa-calendar-alt"></i> Rekap Bulanan
                 </a>
@@ -179,13 +182,6 @@
                             <div class="metric-info">
                                 <span class="label">Total Drum Diuji</span>
                                 <span id="metricDrums" class="value">0</span>
-                            </div>
-                        </div>
-                        <div class="metric-card info-card">
-                            <div class="metric-icon"><i class="fas fa-calendar-day"></i></div>
-                            <div class="metric-info">
-                                <span class="label">Input Terakhir</span>
-                                <span id="metricLastInput" class="value" style="font-size: 16px; font-weight: 700; color: var(--secondary); margin-top: 4px;">-</span>
                             </div>
                         </div>
                         <div class="metric-card success-card">
@@ -282,7 +278,9 @@
                                         <th>Shift</th>
                                         <th>Tester</th>
                                         <th>Partner</th>
-
+                                        <th>Input</th>
+                                        <th>Output</th>
+                                        <th>Sisa</th>
                                         <th>No. Produksi</th>
                                         <th>Tipe Kabel (Size)</th>
                                         <th>Panjang</th>
@@ -349,7 +347,11 @@
                                 <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Kinerja dihitung
                                     berdasarkan total drum output yang dikerjakan pasangan tim (2 orang)</p>
                             </div>
-
+                            <div class="leaderboard-toggle-btn">
+                                <div class="toggle-opt active" onclick="setLeaderboardView('team')">Kinerja Tim</div>
+                                <div class="toggle-opt" onclick="setLeaderboardView('individual')">Kinerja Individu
+                                </div>
+                            </div>
                         </div>
 
                         <div class="table-responsive" style="margin-top: 15px;">
@@ -379,7 +381,8 @@
                         <div class="card-header-flex">
                             <div>
                                 <h3>Kelola Akun Karyawan</h3>
-                                <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Super Admin, Manager, dan Supervisor dapat mengelola akun karyawan</p>
+                                <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Supervisor dapat
+                                    menambah, mengubah, dan menghapus akun Operator & Supervisor</p>
                             </div>
                             <button class="btn-action" onclick="openUserModal()">
                                 <i class="fas fa-user-plus"></i> Tambah Karyawan Baru
@@ -394,7 +397,6 @@
                                         <th>Username</th>
                                         <th>Password</th>
                                         <th>Role / Jabatan</th>
-                                        <th>Grup</th>
                                         <th style="width: 100px;">Aksi</th>
                                     </tr>
                                 </thead>
@@ -405,7 +407,40 @@
                         </div>
                     </div>
 
+                    <!-- TAB 6: PENGUJIAN TERAKHIR -->
+                    <div id="recent-testsTab" class="dashboard-tab">
+                        <div class="dashboard-card">
+                            <div class="card-header-flex">
+                                <div>
+                                    <h3>Daftar Pengujian Terakhir</h3>
+                                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Menampilkan
+                                        riwayat laporan hasil pengujian yang dimasukkan</p>
+                                </div>
+                            </div>
 
+                            <div class="table-responsive" style="margin-top: 15px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hari & Tanggal</th>
+                                            <th>Shift</th>
+                                            <th>Tester Utama</th>
+                                            <th>Asisten (Partner)</th>
+                                            <th>No. Bobin (Ordering)</th>
+                                            <th>No. Produksi</th>
+                                            <th>Tipe Kabel (Size)</th>
+                                            <th>Panjang</th>
+                                            <th>Status</th>
+                                            <th style="width: 80px;">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recentTestsTableTbody">
+                                        <!-- Auto-filled by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <!-- Footer -->
@@ -608,18 +643,6 @@
                         <select id="userFormRole" class="form-control" style="padding-left: 15px;">
                             <option value="Operator">Operator (User Biasa)</option>
                             <option value="Supervisor">Supervisor (Admin)</option>
-                            <option value="Manager">Manager (Akses Supervisor)</option>
-                            <option value="Super Admin">Super Admin (Akses Full)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="userFormGroup">Grup</label>
-                        <select id="userFormGroup" class="form-control" style="padding-left: 15px;">
-                            <option value="Grup 1">Grup 1</option>
-                            <option value="Grup 2">Grup 2</option>
-                            <option value="Grup 3">Grup 3</option>
-                            <option value="Grup 4">Grup 4</option>
                         </select>
                     </div>
                 </div>
